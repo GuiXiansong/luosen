@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gxs.dao.MemberDao">
+
+    <!--目的：为DAO接口方法提供sql语句配置-->
+    <resultMap id="map" type="com.gxs.pojo.Member">
+        <id column="id" property="id"/>
+        <result property="cardNumber" column="card_number"/>
+        <result property="name" column="name"/>
+        <result property="sex" column="sex"/>
+        <result property="phone" column="phone"/>
+        <result property="integral" column="integral"/>
+        <result property="grade" column="grade"/>
+    </resultMap>
+
+    <sql id="column_list">
+        id,card_number,name,sex,phone,integral,grade
+    </sql>
+
+    <select id="selectCount" resultType="int">
+        select count(*) from member
+    </select>
+
+    <select id="findByPage" parameterType="Map" resultMap="map">
+        select
+        <include refid="column_list"></include>
+        from member
+        <if test="start!=null and size!=null">
+            limit #{start},#{size}
+        </if>
+    </select>
+
+    <select id="findAll" resultMap="map">
+        select * from member limit 0,5
+    </select>
+
+    <insert id="addMember" parameterType="com.gxs.pojo.Member">
+        insert into member (card_number,name,sex,phone,integral,grade) value (#{cardNumber},#{name},#{sex},#{phone},#{integral},#{grade})
+    </insert>
+
+    <delete id="deleteMember" parameterType="Long">
+        delete from member where id=#{id}
+    </delete>
+
+    <update id="deleteId">
+        ALTER TABLE member DROP COLUMN id;
+    </update>
+
+    <update id="addId">
+        ALTER TABLE member ADD id BIGINT NOT NULL PRIMARY KEY AUTO_INCREMENT FIRST;
+    </update>
+
+    <select id="findMemberById" parameterType="Long" resultMap="map">
+        select * from member where id=#{id}
+    </select>
+
+    <update id="modifyMember" parameterType="com.gxs.pojo.Member">
+        update member set card_number=#{cardNumber},name=#{name},sex=#{sex},phone=#{phone},integral=#{integral},grade=#{grade} where id=#{id}
+    </update>
+</mapper>

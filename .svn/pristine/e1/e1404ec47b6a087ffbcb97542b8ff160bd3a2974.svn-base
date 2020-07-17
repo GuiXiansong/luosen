@@ -1,0 +1,13 @@
+package com.gxs.controller;
+
+import org.springframework.stereotype.Controller;
+
+/**
+ * @author 皮皮桂
+ * @site guixiansong.com
+ * @company 皮皮桂软件开发科技有限公司
+ * @create 2020-03-16 10:16 PM
+ */
+@Controller
+public class EmployeeController {
+}

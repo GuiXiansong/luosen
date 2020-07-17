@@ -1,0 +1,40 @@
+package com.gxs.controller;
+
+import com.gxs.pojo.Logistics;
+import com.gxs.pojo.PageBean;
+import com.gxs.service.LogisticsService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
+/**
+ * @author 皮皮桂
+ * @site guixiansong.com
+ * @company 皮皮桂软件开发科技有限公司
+ * @create 2020-04-02 2:30 PM
+ */
+
+@Controller
+@RequestMapping("/logistics")
+public class LogisticsController {
+
+    @Autowired
+    private LogisticsService logisticsService;
+    /**
+     * 跳向物流信息页面
+     */
+    @RequestMapping("/toLogistics")
+    public String toLogistics(Model model,@RequestParam(value = "currentPage",defaultValue = "1",required = false) int currentPage){
+        PageBean<Logistics> pageBean=logisticsService.findByPage(currentPage);
+        if (pageBean.getTotalCount()==0){
+            pageBean.setCurrPage(0);
+        }
+        model.addAttribute("pagemsg",pageBean);
+        return "view/logistics/logistics";
+    }
+
+
+
+}

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gxs.dao.MemberDao">
+
+    <!--目的：为DAO接口方法提供sql语句配置-->
+    <resultMap id="map" type="com.gxs.pojo.Member">
+        <id column="id" property="id"/>
+        <result property="cardNumber" column="card_number"/>
+        <result property="name" column="name"/>
+        <result property="sex" column="sex"/>
+        <result property="phone" column="phone"/>
+        <result property="integral" column="integral"/>
+        <result property="grade" column="grade"/>
+    </resultMap>
+
+    <select id="findAll" resultMap="map">
+        select * from member limit 0,5
+    </select>
+
+    <insert id="addMember" parameterType="com.gxs.pojo.Member">
+        insert into member (card_number,name,sex,phone,integral,grade) value (#{cardNumber},#{name},#{sex},#{phone},#{integral},#{grade})
+    </insert>
+</mapper>

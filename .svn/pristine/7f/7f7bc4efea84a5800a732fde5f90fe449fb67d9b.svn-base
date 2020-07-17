@@ -1,0 +1,26 @@
+package com.gxs.service.impl;
+
+import com.gxs.dao.MemberDao;
+import com.gxs.pojo.Member;
+import com.gxs.service.MemberService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+
+/**
+ * @author 皮皮桂
+ * @site guixiansong.com
+ * @company 皮皮桂软件开发科技有限公司
+ * @create 2020-03-18 4:49 PM
+ */
+@Service
+public class MemberServiceImpl implements MemberService {
+
+    @Autowired
+    private MemberDao memberDao;
+    @Override
+    public List<Member> findAll() {
+        return memberDao.findAll();
+    }
+}

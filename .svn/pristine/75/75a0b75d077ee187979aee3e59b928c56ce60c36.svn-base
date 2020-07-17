@@ -1,0 +1,203 @@
+package com.gxs.controller;
+
+import com.gxs.enumerate.StoreRoles;
+import com.gxs.pojo.*;
+import com.gxs.service.EmployeeService;
+import com.gxs.service.GoodsService;
+import com.gxs.service.MerchandisingService;
+import com.gxs.service.StoreService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import javax.servlet.http.HttpSession;
+import java.util.List;
+
+import static com.gxs.controller.EmployeeController.findStoreIdBySession;
+
+/**
+ * @author 皮皮桂
+ * @site guixiansong.com
+ * @company 皮皮桂软件开发科技有限公司
+ * @create 2020-04-17 1:51
+ */
+
+/**
+ * 商品销售信息
+ */
+@Controller
+@RequestMapping("/merchandising")
+public class MerchandisingController {
+
+    private static final Logger LOGGER= LoggerFactory.getLogger(MerchandisingController.class);
+    @Autowired
+    private StoreService storeService;
+    @Autowired
+    private MerchandisingService merchandisingService;
+    @Autowired
+    private GoodsService goodsService;
+    @Autowired
+    private EmployeeService employeeService;
+
+    /**
+     * 查询所有本店的销售信息
+     */
+    @RequestMapping("/findMerchandisingByStoreId")
+    public String findMerchandisingByStoreId(HttpSession session, Model model, @RequestParam(value = "currentPage",defaultValue = "1",required = false) int currentPage){
+        LOGGER.info("到了MerchandisingController这里了");
+//        List<Merchandising> list=employeeService.findMerchandisingByStoreId();
+        Long storeId=findStoreIdBySession(session);
+        LOGGER.info("storeId===================="+storeId);
+        PageBean<Merchandising> pageBean=merchandisingService.findByPage(currentPage,storeId);
+        if (pageBean.getTotalCount()==0){
+            pageBean.setCurrPage(0);
+        }
+        model.addAttribute("pagemsg",pageBean);
+
+
+        String roles=findRolesByStoreId(storeId);
+        return toMyMerchandisingByRoles(roles);
+    }
+
+
+    /**
+     * 跳向添加商品销售信息页面的方法
+     * 分店只能添加自己店的信息（店铺编号）
+     * 只能添加自己店的员工为销售员
+     * 可以添加所有的商品
+     * @param session
+     * @param model
+     * @return
+     */
+    @RequestMapping("/toAddMerchandising")
+    public String toAddMerchandising(HttpSession session,Model model){
+        Long storeId=findStoreIdBySession(session);
+        model.addAttribute("storeId",storeId);
+        model.addAttribute("goodsList",findAllGoodsInfo());
+        model.addAttribute("employeeList",findEmployeeByStoreId(storeId));
+        return "view/goods/merchandising/addMerchandising";
+    }
+
+
+    /**
+     * 增加商品销售信息
+     * @param merchandising
+     * @return
+     */
+    @RequestMapping("/addMerchandisingInfo")
+    public String addMerchandisingInfo(Merchandising merchandising){
+        merchandisingService.addMerchandisingInfo(merchandising);
+        return "redirect:findMerchandisingByStoreId.do";
+    }
+
+
+    /**
+     * 跳到修改商品销售信息页面
+     * @param id
+     * @param model
+     * @param session
+     * @return
+     */
+    @RequestMapping("/toModifyMerchandising")
+    public String toModifyMerchandising(Long id,Model model,HttpSession session){
+        Merchandising merchandising=findMerchandisingById(id);
+        Long storeId=findStoreIdBySession(session);
+        model.addAttribute("storeId",storeId);
+        model.addAttribute("goodsList",findAllGoodsInfo());
+        model.addAttribute("employeeList",findEmployeeByStoreId(storeId));
+        model.addAttribute("merchandising",merchandising);
+        return "view/goods/merchandising/modifyMerchandising";
+    }
+
+
+    /**
+     * 修改商品销售信息
+     * @param merchandising
+     * @return
+     */
+    @RequestMapping("/modifyMerchanising")
+    public String modifyMerchanising(Merchandising merchandising){
+        merchandisingService.modifyMerchanising(merchandising);
+        return "redirect:findMerchandisingByStoreId.do";
+    }
+
+    /**
+     * 根据id删除单条商品销售信息
+     * @param id
+     * @return
+     */
+    @RequestMapping("/deleteMerchandising")
+    public String deleteMerchandising(Long id){
+        merchandisingService.deleteMerchandising(id);
+        return "redirect:findMerchandisingByStoreId.do";
+    }
+
+    /**
+     * 根据id查询对应的商品销售信息
+     * @param id
+     * @return
+     */
+    public Merchandising findMerchandisingById(Long id){
+        return merchandisingService.findMerchandisingById(id);
+    }
+
+    /**
+     * 查询所有的商品基本信息
+     * @return
+     */
+    public List<Goods> findAllGoodsInfo(){
+        return goodsService.findAll();
+    }
+
+    /**
+     * 查询本店所有的员工信息
+     * @param storeId
+     * @return
+     */
+    public List<Employee> findEmployeeByStoreId(Long storeId){
+        return employeeService.findEmployeeByStoreId(storeId);
+    }
+
+
+    /**
+     * 根据角色跳到自己的员工界面
+     * @param roles
+     * @return
+     */
+    public String toMyMerchandisingByRoles(String roles){
+        if (roles.equals(StoreRoles.HEADOFFICE.getName())){
+            return "head_office/goods/merchandising/merchandising";
+        }
+        if (roles.equals(StoreRoles.BRANCH.getName())){
+            return "view/goods/merchandising/merchandising";
+        }
+        return "";
+    }
+
+/*    *//**
+     * 根据session查询店铺id
+     * @param session
+     * @return
+     *//*
+    public Long findStoreIdBySession(HttpSession session){
+        User user=(User)session.getAttribute("user");
+        Long storeId=user.getStoreId();
+        return storeId;
+    }*/
+
+    /**
+     * 根据店铺id查询店铺角色（总店/分店）
+     * @param storeId
+     * @return
+     */
+    public String findRolesByStoreId(Long storeId){
+        PageBean<Store> pageBean=storeService.selectStoreInfoById(1,storeId);
+        String roles=pageBean.getLists().get(0).getRoles();
+        return roles;
+    }
+
+}

@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gxs.dao.EmployeeDao">
+
+    <!--目的：为DAO接口方法提供sql语句配置-->
+    <resultMap id="map" type="com.gxs.pojo.Employee">
+        <id column="id" property="id"/>
+        <result property="storeId" column="store_id"/>
+        <result property="name" column="name"/>
+        <result property="sex" column="sex"/>
+        <result property="phone" column="phone"/>
+        <result property="position" column="position"/>
+        <result property="sales" column="sales"/>
+        <result property="salesCommission" column="sales_commission"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,name,sex,phone,sales_commission
+    </sql>
+
+    <select id="findAll" resultMap="map">
+        select * from employee limit 0,5
+    </select>
+
+    <select id="selectCount" parameterType="Long" resultType="int">
+        select count(*) from employee where store_id=#{storeId}
+    </select>
+
+    <select id="findByPage" parameterType="Map" resultMap="map">
+        select
+        *
+        from employee where store_id=#{storeId}
+        <if test="start!=null and size!=null">
+            limit #{start},#{size}
+        </if>
+    </select>
+
+    <select id="findEmployeeById" parameterType="Long" resultMap="map">
+        select * from employee where id=#{id}
+    </select>
+
+    <insert id="addEmployee" parameterType="com.gxs.pojo.Employee">
+        insert into employee (store_id,name,sex,phone,position,sales,sales_commission) value (#{storeId},#{name},#{sex},#{phone},#{position},0,0)
+    </insert>
+
+    <delete id="deleteEmployee" parameterType="Long">
+        delete from employee where id=#{id}
+    </delete>
+
+    <update id="deleteId">
+        ALTER TABLE employee DROP COLUMN id;
+    </update>
+
+    <update id="addId">
+        ALTER TABLE employee ADD id BIGINT NOT NULL PRIMARY KEY AUTO_INCREMENT FIRST;
+    </update>
+
+    <update id="modifyEmployee" parameterType="com.gxs.pojo.Employee">
+        update employee
+        set store_id=#{storeId},name=#{name},sex=#{sex},phone=#{phone},position=#{position},sales=#{sales},sales_commission=#{salesCommission}
+        where id=#{id}
+    </update>
+
+    <select id="findEmployeeByStoreId" parameterType="Long" resultMap="map">
+        select * from employee where store_id=#{storeId}
+    </select>
+</mapper>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gxs.dao.UserDao">
+
+<!--    作用：将数据库表中和实体类不同的字段对应起来-->
+    <resultMap id="map" type="com.gxs.pojo.User">
+        <result property="storeId" column="store_id"/>
+    </resultMap>
+
+
+    <select id="login" parameterType="String" resultMap="map">
+        select * from user where username=#{username}
+    </select>
+
+    <select id="findByName" parameterType="String" resultType="com.gxs.pojo.User">
+        select * from user where username=#{username}
+    </select>
+
+    <update id="changePasswordByUsername" parameterType="String">
+        update user set password=#{password} where username=#{username}
+    </update>
+</mapper>

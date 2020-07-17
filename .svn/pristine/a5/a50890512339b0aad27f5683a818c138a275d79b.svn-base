@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gxs.dao.CommodityPurchaseDao">
+
+    <!--目的：为DAO接口方法提供sql语句配置-->
+    <resultMap id="map" type="com.gxs.pojo.CommodityPurchase">
+        <id column="id" property="id"/>
+        <result property="goodsId" column="goods_id"/>
+        <result property="purchaseDate" column="purchase_date"/>
+        <result property="totalPurchasePrice" column="total_purchase_price"/>
+        <result property="supplierInformation" column="supplier_information"/>
+    </resultMap>
+
+    <insert id="addCommodityPurchase" parameterType="com.gxs.pojo.CommodityPurchase">
+        insert into commodity_purchase values (null,#{goodsId},#{quantity},#{purchaseDate},#{totalPurchasePrice},#{supplierInformation})
+    </insert>
+
+    <select id="findAll" resultMap="map">
+        select * from commodity_purchase
+    </select>
+
+    <update id="deleteId">
+        ALTER TABLE commodity_purchase DROP COLUMN id;
+    </update>
+
+    <update id="addId">
+        ALTER TABLE commodity_purchase ADD id BIGINT NOT NULL PRIMARY KEY AUTO_INCREMENT FIRST;
+    </update>
+
+    <select id="findCommodityPurchaseById" parameterType="Long" resultMap="map">
+        select * from commodity_purchase where id=#{id}
+    </select>
+
+    <update id="modifyCommodityPurchase" parameterType="com.gxs.pojo.CommodityPurchase">
+        update commodity_purchase set goods_id=#{goodsId},quantity=#{quantity},purchase_date=#{purchaseDate},total_purchase_price=#{totalPurchasePrice},supplier_information=#{supplierInformation} where id=#{id}
+    </update>
+
+    <delete id="deleteCommodityPurchase" parameterType="Long">
+        delete from commodity_purchase where id=#{id}
+    </delete>
+</mapper>

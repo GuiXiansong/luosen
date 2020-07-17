@@ -1,0 +1,137 @@
+package com.gxs.controller;
+
+import com.gxs.pojo.User;
+import com.gxs.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import javax.servlet.http.HttpSession;
+import java.util.List;
+
+/**
+ * @author 皮皮桂
+ * @site guixiansong.com
+ * @company 皮皮桂软件开发科技有限公司
+ * @create 2020-03-17 12:18 AM
+ */
+@Controller
+@RequestMapping("/user")
+public class UserController {
+
+    @Autowired
+    private UserService userService;
+    /*登录功能*/
+    @RequestMapping("/login")
+    public String login(@RequestParam String username, @RequestParam String password, Model model, HttpSession session) {
+        User user = userService.login(username);
+        //获取角色信息
+//        String roles = user.getRoles();
+        if (user != null) {
+            if (user.getPassword().equals(password)) {
+                session.setAttribute("user", user);
+                /*//判断用户角色
+                //1.学生
+                if (roles.equals("学生")) {
+                    //根据学号查找姓名
+//                    Long id = Long.parseLong(username);
+//                    Student student = studentController.findStudentInfoById(id);
+//                    session.setAttribute("user", student);
+                    return "view/page";
+                } else if (roles.equals("辅导员")) {
+                    return "counselor/page";
+                } else if (roles.equals("大学生事务中心")) {
+                    return "studentAffairsCenter/page";
+                } else if (roles.equals("后勤部门")) {
+//                    session.setAttribute("user",user);
+                    return "logistics/page";
+                } else if (roles.equals("系统管理员")) {
+                    List<User> list = findAllUser();
+                    session.setAttribute("userListAdmin", list);
+                    return "admin/page";
+                }*/
+                return "view/page";
+                //2.辅导员
+                //3.大学生事务中心
+                //4.管理员
+            } else {
+                model.addAttribute("message", "用户名或密码错误");
+                return "view/login/info";
+            }
+        } else {
+            model.addAttribute("message", "用户名不存在");
+            return "view/login/info";
+        }
+    }
+
+
+    @RequestMapping("/toIndex")
+    public String toIndex(){
+        return "../index";
+    }
+
+    /**
+     * 跳转修改密码界面
+     */
+    @RequestMapping("/toPasswordChangePage")
+    public String toPasswordChangePage() {
+        return "view/password/passwordChangePage";
+    }
+
+    /**
+     * 跳转到首页page
+     */
+    @RequestMapping("/toPage")
+    public String page(HttpSession session) {
+        return "view/page";
+    }
+
+    /**
+     * 退出登录
+     */
+    @RequestMapping("/outLogin")
+    public String outLogin(HttpSession session) {
+        session.invalidate();
+        return "../index";
+    }
+
+    /**
+     * 修改密码
+     */
+    @RequestMapping("/changePassword")
+    public String changePassword(Model model, HttpSession session, @RequestParam String oldPassword, @RequestParam String newPassword1, @RequestParam String newPassword2) {
+        String messagePasswordChange;
+        //查证旧密码是否正确
+        User user2 = (User) session.getAttribute("user");
+        String username = user2.getUsername();
+        System.out.println(username);
+        User user = findPasswordByUsername(username);
+        //用户角色
+        String password = user.getPassword();
+        if (oldPassword.equals(password)) {
+            if (newPassword1.equals(newPassword2)) {
+                //                将新密码写入数据库
+                messagePasswordChange = "密码修改成功";
+                model.addAttribute("messagePasswordChange", messagePasswordChange);
+                userService.changePasswordByUsername(username, newPassword1);
+                return "view/page";
+            }
+            messagePasswordChange = "两次输入的密码不一致";
+            model.addAttribute("messagePasswordChange", messagePasswordChange);
+            return "view/password/passwordChangePageInfo";
+        }
+        messagePasswordChange = "旧密码错误！";
+        model.addAttribute("messagePasswordChange", messagePasswordChange);
+        return "view/password/passwordChangePageInfo";
+    }
+
+    /**
+     * 根据用户名查用户信息
+     */
+    public User findPasswordByUsername(String username) {
+        User user = userService.findByName(username);
+        return user;
+    }
+}

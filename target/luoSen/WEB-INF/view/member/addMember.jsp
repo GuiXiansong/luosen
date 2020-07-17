@@ -1,0 +1,135 @@
+<%@ page import="java.text.SimpleDateFormat" %>
+<%@ page import="java.util.Date" %>
+<%@ page isELIgnored="false" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%
+    String path = request.getContextPath();
+    String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path;
+    Date date = new Date();
+    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+    String nowDate = sdf.format(date);
+%>
+<html>
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <title>罗森连锁店分店管理系统</title>
+
+    <link rel="stylesheet" href="<%=basePath%>/static/css/formStyle.css" media="screen" type="text/css" />
+
+</head>
+
+<body>
+
+<div class="container">
+    <form id="contact" action="<%=basePath%>/member/addMember.do" method="post">
+        <h3>添加会员</h3>
+        <h4>我们将尽快解决您的申请，请耐心等待</h4>
+        <fieldset>
+            <input placeholder="卡号" type="text" name="cardNumber" tabindex="1" required autofocus>
+        </fieldset>
+        <fieldset>
+            <input placeholder="姓名" type="text" name="name" tabindex="1" required autofocus>
+        </fieldset>
+        <fieldset>
+            <select name="sex" class="select" style="width: 100%;height: 40px; vertical-align: middle; line-height: 40px;" tabindex="1" required autofocus>
+                <option value="男">男</option>
+                <option value="女">女</option>
+            </select>
+        </fieldset>
+        <fieldset>
+            <input placeholder="手机号" type="text" name="phone" tabindex="1" required autofocus>
+        </fieldset>
+        <fieldset>
+            <input placeholder="积分" type="text" name="integral" tabindex="1" required autofocus>
+        </fieldset>
+        <fieldset>
+            <select name="grade" class="select" style="width: 100%;height: 40px; vertical-align: middle; line-height: 40px;" tabindex="1" required autofocus>
+                <option value="一">一</option>
+                <option value="二">二</option>
+                <option value="三">三</option>
+                <option value="四">四</option>
+                <option value="五">五</option>
+            </select>
+        </fieldset>
+
+        <%--        <fieldset>--%>
+        <%--            <input placeholder="申请时段:上午、下午、晚上" type="text" name="period" tabindex="1" required autofocus>--%>
+        <%--        </fieldset>--%>
+        <%--    <fieldset>
+              <input placeholder="教室号" type="number" tabindex="1" required autofocus>
+            </fieldset>--%>
+        <%--    <fieldset>
+              <input placeholder="Your Email Address" type="email" tabindex="2" required>
+            </fieldset>
+            <fieldset>
+              <input placeholder="Your Phone Number" type="tel" tabindex="3" required>
+            </fieldset>
+            <fieldset>
+              <input placeholder="Your Web Site starts with http://" type="url" tabindex="4" required>
+            </fieldset>
+            <fieldset>
+              <textarea placeholder="Type your Message Here...." tabindex="5" required></textarea>
+            </fieldset>--%>
+        <fieldset>
+            <button name="submit" type="submit" id="contact-submit" data-submit="...Sending">Submit</button>
+        </fieldset>
+    </form>
+
+</div>
+<div style="text-align:center;clear:both">
+</div>
+</body>
+
+</html>
+
+
+<%--<form action="<%=basePath%>/holiday/takeLeaveInsert.do" method="post">--%>
+<%--    <table border="1" cellspacing="" cellpadding="">--%>
+<%--        <tr>--%>
+<%--            <td align="center" colspan="2">请假页面</td>--%>
+<%--        </tr>--%>
+<%--        <tr>--%>
+<%--            <td>姓名：</td>--%>
+<%--            <td><input type="text" name="name" size="29"></td>--%>
+<%--        </tr>--%>
+<%--        <tr>--%>
+<%--            <td>学号：</td>--%>
+<%--            <td><input type="number" name="studentId" size="30"></td>--%>
+<%--        </tr>--%>
+<%--        <tr>--%>
+<%--            <td>专业：</td>--%>
+<%--            <td><input type="text" name="profession" size="30"></td>--%>
+<%--        </tr>--%>
+<%--        <tr>--%>
+<%--            <td>班级：</td>--%>
+<%--            <td><input type="text" name="studentClass" size="30"></td>--%>
+<%--        </tr>--%>
+<%--        <tr>--%>
+<%--            <td>手机号：</td>--%>
+<%--            <td><input type="number" name="phoneNumber" size="30"></td>--%>
+<%--        </tr>--%>
+<%--        <tr>--%>
+<%--            <td>开始时间：</td>--%>
+<%--            <td><input type="date" name="startTime" size="30"></td>--%>
+<%--        </tr>--%>
+<%--        <tr>--%>
+<%--            <td>结束时间：</td>--%>
+<%--            <td><input type="date" name="endTime" size="30"></td>--%>
+<%--        </tr>--%>
+<%--        &lt;%&ndash;            <tr>--%>
+<%--                        <td colspan="2">上传文件:<input type="file"></td>--%>
+<%--                    </tr>&ndash;%&gt;--%>
+<%--        <tr>--%>
+<%--            <td align="center">请假事由:</td>--%>
+<%--            <td><textarea name="cause" rows="10" cols="30"></textarea></td>--%>
+<%--        </tr>--%>
+<%--        <tr>--%>
+<%--            <td colspan="2" align="center"><input type="submit" value="提交"></td>--%>
+<%--        </tr>--%>
+
+<%--    </table>--%>
+<%--</form>--%>

@@ -1,0 +1,56 @@
+<%@ page import="java.text.SimpleDateFormat" %>
+<%@ page import="java.util.Date" %>
+<%@ page isELIgnored="false" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%
+    String path = request.getContextPath();
+    String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path;
+    Date date = new Date();
+    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+    String nowDate = sdf.format(date);
+%>
+<html>
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <title>罗森连锁店总店管理系统</title>
+
+    <link rel="stylesheet" href="<%=basePath%>/static/css/formStyle.css" media="screen" type="text/css" />
+
+</head>
+<body>
+
+<div class="container">
+    <form id="contact" action="<%=basePath%>/store/modifyStoreInfo.do" method="post">
+        <h3>修改商品采购信息</h3>
+        <h4>我们将尽快解决您的申请，请耐心等待</h4>
+        <fieldset>
+            <input type="hidden" name="id" value="${modifyStoreInfo.id}" tabindex="1" required autofocus>
+        </fieldset>
+        <fieldset>
+            <input placeholder="店铺名称" type="text" name="name" value="${modifyStoreInfo.name}" tabindex="1" required autofocus>
+        </fieldset>
+        <fieldset>
+            <input placeholder="店铺地址" type="text" name="address" value="${modifyStoreInfo.address}" tabindex="1" required autofocus>
+        </fieldset>
+        <fieldset>
+            <select name="roles" class="select" style="width: 100%;height: 40px; vertical-align: middle; line-height: 40px;" tabindex="1" required autofocus>
+                <option value="${modifyStoreInfo.roles}">${modifyStoreInfo.roles}</option>
+                <option value="分店">分店</option>
+                <option value="总店">总店</option>
+            </select>
+        </fieldset>
+        <fieldset>
+            <button name="submit" type="submit" id="contact-submit" data-submit="...Sending">Submit</button>
+        </fieldset>
+    </form>
+
+</div>
+<div style="text-align:center;clear:both">
+</div>
+</body>
+
+</html>

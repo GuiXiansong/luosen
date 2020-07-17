@@ -1,0 +1,76 @@
+package com.gxs.pojo;
+
+/**
+ * @author 皮皮桂
+ * @site guixiansong.com
+ * @company 皮皮桂软件开发科技有限公司
+ * @create 2020-04-01 9:42 PM
+ */
+
+import java.io.Serializable;
+
+/**
+ * 物流信息
+ */
+public class Logistics{
+    //编号
+    private Long id;
+    //起始点店铺id
+    private Long startStoreId;
+    //终止点店铺id
+    private Long endStoreId;
+    //距离(默认为千米)
+    private double distance;
+    //物品重量
+    private Double weight;
+    //运费
+    private Double freight;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Long getStartStoreId() {
+        return startStoreId;
+    }
+
+    public void setStartStoreId(Long startStoreId) {
+        this.startStoreId = startStoreId;
+    }
+
+    public Long getEndStoreId() {
+        return endStoreId;
+    }
+
+    public void setEndStoreId(Long endStoreId) {
+        this.endStoreId = endStoreId;
+    }
+
+    public double getDistance() {
+        return distance;
+    }
+
+    public void setDistance(double distance) {
+        this.distance = distance;
+    }
+
+    public Double getWeight() {
+        return weight;
+    }
+
+    public void setWeight(Double weight) {
+        this.weight = weight;
+    }
+
+    public Double getFreight() {
+        return freight;
+    }
+
+    public void setFreight(Double freight) {
+        this.freight = freight;
+    }
+}

@@ -1,0 +1,63 @@
+package com.gxs.pojo;
+
+/**
+ * @author婷婷小可爱
+ * @site www.dengtingting.com
+ * @company 婷婷软件开发科技有限公司
+ * @create 2020-03-16 4:08 PM
+ */
+/**
+ * 员工基本信息
+ */
+public class Employee {
+    //员工编号
+    private Long id;
+    //员工姓名
+    private String name;
+    //员工性别
+    private String sex;
+    //手机号
+    private String phone;
+    //销售提成
+    private String SalesCommission;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getSex() {
+        return sex;
+    }
+
+    public void setSex(String sex) {
+        this.sex = sex;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public String getSalesCommission() {
+        return SalesCommission;
+    }
+
+    public void setSalesCommission(String salesCommission) {
+        SalesCommission = salesCommission;
+    }
+}

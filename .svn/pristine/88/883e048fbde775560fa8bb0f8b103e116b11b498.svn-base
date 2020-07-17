@@ -1,0 +1,36 @@
+package com.gxs.service.impl;
+
+import com.gxs.dao.GoodsDao;
+import com.gxs.pojo.Goods;
+import com.gxs.service.GoodsService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+
+/**
+ * @author 皮皮桂
+ * @site guixiansong.com
+ * @company 皮皮桂软件开发科技有限公司
+ * @create 2020-03-18 10:30 PM
+ */
+@Service
+public class GoodsServiceImpl implements GoodsService {
+
+    @Autowired
+    private GoodsDao goodsDao;
+    @Override
+    public List<Goods> findAll() {
+        return goodsDao.findAll();
+    }
+
+    @Override
+    public void deleteGoods(Long id) {
+        goodsDao.deleteGoods(id);
+    }
+
+    @Override
+    public void addGoods(Goods goods) {
+        goodsDao.addGoods(goods);
+    }
+}

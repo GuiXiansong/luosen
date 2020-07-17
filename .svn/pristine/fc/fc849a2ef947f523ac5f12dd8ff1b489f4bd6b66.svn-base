@@ -1,0 +1,154 @@
+package com.gxs.controller;
+
+import com.gxs.enumerate.StoreRoles;
+import com.gxs.pojo.User;
+import com.gxs.service.StoreService;
+import com.gxs.service.UserService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.view.RedirectView;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+import java.util.List;
+
+/**
+ * @author 皮皮桂
+ * @site guixiansong.com
+ * @company 皮皮桂软件开发科技有限公司
+ * @create 2020-03-17 12:18 AM
+ */
+@Controller
+@RequestMapping("/user")
+public class UserController {
+
+    private static final Logger LOGGER=LoggerFactory.getLogger(UserController.class);
+    @Autowired
+    private UserService userService;
+    @Autowired
+    private StoreService storeService;
+    /*登录功能*/
+    @RequestMapping("/login")
+    public String login(@RequestParam String username, @RequestParam String password, Model model, HttpSession session, HttpServletRequest request) {
+        User user = userService.login(username);
+//        ModelAndView modelAndView = new ModelAndView();
+        //获取角色信息
+//        String roles = user.getRoles();
+        if (user != null) {
+            if (user.getPassword().equals(password)) {
+                session.setAttribute("user", user);
+                String path = request.getContextPath();
+                System.out.println(path);
+//                modelAndView.setView(new RedirectView(path+"/user/toPage.do"));
+//                return modelAndView;
+                LOGGER.info("storeId="+user.getStoreId());
+                //根据店铺id获取店铺角色
+                String roles=null;
+                try {
+                    roles=storeService.findStoreInfoById(user.getStoreId()).getRoles();
+                }catch (Exception e){
+                    LOGGER.info("用户表里对应的店铺id为空",e.getCause());
+                }
+                //判断进入总店
+                if (roles.equals(StoreRoles.HEADOFFICE.getName())){
+                    LOGGER.info("到达总店首页页面");
+                    return "redirect:toHeadOfficePage.do";
+                }
+                //进入分店
+                LOGGER.info("到达分店首页页面");
+                return "redirect:toPage.do";
+            } else {
+                model.addAttribute("message", "用户名或密码错误");
+                return "view/login/info";
+            }
+        } else {
+            model.addAttribute("message", "用户名不存在");
+            return "view/login/info";
+        }
+    }
+
+
+    @RequestMapping("/toIndex")
+    public String toIndex(){
+        return "../index";
+    }
+
+    /**
+     * 跳转修改密码界面
+     */
+    @RequestMapping("/toPasswordChangePage")
+    public String toPasswordChangePage() {
+        return "view/password/passwordChangePage";
+    }
+
+    /**
+     * 跳转到分店首页page
+     */
+    @RequestMapping("/toPage")
+    public String page(HttpSession session) {
+        return "view/page";
+    }
+
+
+    /**
+     * 跳到总店首页
+     */
+    @RequestMapping("/toHeadOfficePage")
+    public String headOfficePage(){
+        return "head_office/page";
+    }
+
+
+    /**
+     * 退出登录
+     */
+    @RequestMapping("/outLogin")
+    public String outLogin(HttpSession session) {
+        session.invalidate();
+        return "../index";
+    }
+
+    /**
+     * 修改密码
+     */
+    @RequestMapping("/changePassword")
+    public String changePassword(Model model, HttpSession session, @RequestParam String oldPassword, @RequestParam String newPassword1, @RequestParam String newPassword2) {
+        String messagePasswordChange;
+        //查证旧密码是否正确
+        User user2 = (User) session.getAttribute("user");
+        String username = user2.getUsername();
+        System.out.println(username);
+        User user = findPasswordByUsername(username);
+        //用户角色
+        String password = user.getPassword();
+        if (oldPassword.equals(password)) {
+            if (newPassword1.equals(newPassword2)) {
+                //                将新密码写入数据库
+                messagePasswordChange = "密码修改成功";
+                model.addAttribute("messagePasswordChange", messagePasswordChange);
+                userService.changePasswordByUsername(username, newPassword1);
+                return "view/page";
+            }
+            messagePasswordChange = "两次输入的密码不一致";
+            model.addAttribute("messagePasswordChange", messagePasswordChange);
+            return "view/password/passwordChangePageInfo";
+        }
+        messagePasswordChange = "旧密码错误！";
+        model.addAttribute("messagePasswordChange", messagePasswordChange);
+        return "view/password/passwordChangePageInfo";
+    }
+
+    /**
+     * 根据用户名查用户信息
+     */
+    public User findPasswordByUsername(String username) {
+        User user = userService.findByName(username);
+        return user;
+    }
+}

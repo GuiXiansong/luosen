@@ -1,0 +1,4 @@
+jdbc.driver=com.mysql.jdbc.Driver
+jdbc.url=jdbc:mysql://shenzhen.guixiansong.top:56789/luosen?useUnicode=true&characterEncoding=UTF-8&useSSL=false
+jdbc.username=gxs1
+jdbc.password=L!,Ec6%TYB:6N))00K*1+G8811PtB0

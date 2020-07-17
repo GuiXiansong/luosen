@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gxs.dao.EmployeeDao">
+
+    <!--目的：为DAO接口方法提供sql语句配置-->
+    <resultMap id="map" type="com.gxs.pojo.Employee">
+        <id column="id" property="id"/>
+        <result property="name" column="name"/>
+        <result property="sex" column="sex"/>
+        <result property="phone" column="phone"/>
+        <result property="salesCommission" column="sales_commission"/>
+    </resultMap>
+
+    <select id="findAll" resultMap="map">
+        select * from employee limit 0,5
+    </select>
+
+    <insert id="addEmployee" parameterType="com.gxs.pojo.Employee">
+        insert into employee (name,sex,phone,sales_commission) value (#{name},#{sex},#{phone},#{salesCommission})
+    </insert>
+
+    <delete id="deleteEmployee" parameterType="Long">
+        delete from employee where id=#{id}
+    </delete>
+
+    <update id="deleteId">
+        ALTER TABLE employee DROP COLUMN id;
+    </update>
+
+    <update id="addId">
+        ALTER TABLE employee ADD id BIGINT NOT NULL PRIMARY KEY AUTO_INCREMENT FIRST;
+    </update>
+</mapper>

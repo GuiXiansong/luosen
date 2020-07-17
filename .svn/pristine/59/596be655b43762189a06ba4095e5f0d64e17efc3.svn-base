@@ -1,0 +1,44 @@
+package com.gxs.controller;
+
+/**
+ * @author 皮皮桂
+ * @site guixiansong.com
+ * @company 皮皮桂软件开发科技有限公司
+ * @create 2020-04-03 7:16 PM
+ */
+
+import com.gxs.pojo.PageBean;
+import com.gxs.pojo.Store;
+import com.gxs.service.StoreService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
+/**
+ * 总店和分店对应的编号
+ */
+@Controller
+@RequestMapping("/store")
+public class StoreController {
+    private static final Logger LOGGER= LoggerFactory.getLogger(StoreController.class);
+
+    @Autowired
+    private StoreService storeService;
+
+    /**
+     * 查询所有的店铺信息
+     */
+    @RequestMapping(value = "/findAllStoreInfo")
+    public String findAllStoreInfo(Model model, @RequestParam(value = "currentPage",defaultValue = "1",required = false) int currentPage){
+        PageBean<Store> pageBean=storeService.findAllStoreInfo(currentPage);
+        if (pageBean.getTotalCount()==0){
+            pageBean.setCurrPage(0);
+        }
+        model.addAttribute("pagemsg",pageBean);
+        return "head_office/store/store";
+    }
+}

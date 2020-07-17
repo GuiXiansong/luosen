@@ -1,0 +1,410 @@
+package com.gxs.controller;
+
+import com.gxs.enumerate.StockWarning;
+import com.gxs.enumerate.StoreRoles;
+import com.gxs.pojo.*;
+import com.gxs.service.GoodsService;
+import com.gxs.service.StockInfoService;
+import com.gxs.service.StockService;
+import com.gxs.service.StoreService;
+import com.gxs.view.StockInfoCount;
+import com.sun.org.apache.xpath.internal.operations.Mod;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import javax.servlet.http.HttpSession;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import static com.gxs.controller.EmployeeController.findStoreIdBySession;
+
+/**
+ * @author 皮皮桂
+ * @site guixiansong.com
+ * @company 皮皮桂软件开发科技有限公司
+ * @create 2020-04-17 2:59
+ */
+@Controller
+@RequestMapping("/stock")
+public class StockController {
+    private final static Logger LOGGER = LoggerFactory.getLogger(StockController.class);
+    @Autowired
+    private StockService stockService;
+    @Autowired
+    private StoreService storeService;
+    @Autowired
+    private GoodsService goodsService;
+    @Autowired
+    private StockInfoService stockInfoService;
+
+    /**
+     * 查询本店所有的库存信息
+     */
+    @RequestMapping("/findStockByStoreId")
+    public String findStockByStoreId(HttpSession session, Model model, @RequestParam(value = "currentPage", defaultValue = "1", required = false) int currentPage) {
+        Long storeId = findStoreIdBySession(session);
+        PageBean<Stock> pageBean = stockService.findByPage(currentPage, storeId);
+        if (pageBean.getTotalCount() == 0) {
+            pageBean.setCurrPage(0);
+        }
+        model.addAttribute("pagemsg", pageBean);
+
+        //查询所有的店铺（为下拉框做准备）
+        List<Store> list = storeService.findAllStoreForSelect();
+        model.addAttribute("selectList", list);
+        String roles = findRolesByStoreId(storeId);
+        return toMyStockByRoles(roles);
+    }
+
+
+    /**
+     * 跳向添加商品入库信息页面
+     *
+     * @param model
+     * @return
+     */
+    @RequestMapping("/toAddStockInfo")
+    public String toAddStockInfo(Model model, HttpSession session) {
+        List<Goods> goodsList = goodsService.findAll();
+        Long storeId = findStoreIdBySession(session);
+//        List<Store> storeList=storeService.selectAllStore();
+        model.addAttribute("goodsList", goodsList);
+        model.addAttribute("storeId", storeId);
+//        model.addAttribute("storeList",storeList);
+        return "view/goods/stock/addStock";
+    }
+
+    /**
+     * 跳向添加商品出库信息页面
+     *
+     * @param model
+     * @return
+     */
+    @RequestMapping("/toAddOutOfStock")
+    public String toAddOutOfStock(Model model, HttpSession session) {
+        List<Goods> goodsList = goodsService.findAll();
+        Long storeId = findStoreIdBySession(session);
+//        List<Store> storeList=storeService.selectAllStore();
+        model.addAttribute("goodsList", goodsList);
+        model.addAttribute("storeId", storeId);
+//        model.addAttribute("storeList",storeList);
+        return "view/goods/stock/addOutOfStock";
+    }
+
+
+    /**
+     * 添加商品入库信息
+     *
+     * @param stock
+     * @return
+     */
+    @RequestMapping("/addStockInfo")
+    public String addStockInfo(Stock stock, HttpSession session) {
+        Long storeId = findStoreIdBySession(session);
+        //查出商品id
+        Long goodsId = stock.getGoodsId();
+        //根据商品id和店铺id取出对应商品的库存总量
+        Double sum1 = stockInfoService.getSumByGoodsId(storeId, goodsId);
+        //根据商品id和店铺id将入库的商品的数量加入
+        //取出入库商品的数量
+        Double sum2 = stock.getSum();
+//        //如果本店库存中已经存在该商品的库存信息
+//        if (sum1 != null) {
+        //得出新的商品总量
+        Double newSum = sum1 + sum2;
+        //将商品数量加上入库
+        stockInfoService.warehousing(newSum, storeId, goodsId);
+        //判断是否达到库存预警值
+        //根据商品id和店铺id取出该商品的库存信息
+        StockInfo stockInfo = stockInfoService.getThisStockInfoByGoodsId(storeId, goodsId);
+        Double sum3 = stockInfo.getSum();
+        Double warningValue = stockInfo.getWarningValue();
+        LOGGER.info("warningValue:{}", warningValue);
+        String stockWarning = null;
+        if (sum3 > warningValue) {
+            //如果大于最小预警值，将数据库中库存预警状态改为”正常“
+            stockWarning = StockWarning.NORMAL.getName();
+        }
+        if (sum3 <= warningValue) {
+            //如果小于最小预警值，将数据库中库存预警状态改为”过小“
+            stockWarning = StockWarning.LESS.getName();
+        }
+        stockInfoService.modifyStockWarning(stockWarning, storeId, goodsId);
+//        }else {
+//            //如果本店库存信息中不存在该商品的库存信息
+//
+//        }
+        //将该条入库信息写入数据库出入库信息表中
+        stockService.addStockInfo(stock);
+        return "redirect:toWarehousing.do";
+    }
+
+
+    /**
+     * 添加商品出库信息
+     *
+     * @param stock
+     * @return
+     */
+    @RequestMapping("/addOutOfStock")
+    public String addOutOfStock(Stock stock,HttpSession session,Model model) {
+        //删除错误信息
+        if (session.getAttribute("addOutOfStockMsg")!=null){
+            session.removeAttribute("addOutOfStockMsg");
+        }
+        Long storeId = findStoreIdBySession(session);
+        //查出商品id
+        Long goodsId = stock.getGoodsId();
+        //根据商品id和店铺id取出对应商品的库存总量
+        Double sum1 = stockInfoService.getSumByGoodsId(storeId, goodsId);
+        //根据商品id和店铺id将入库的商品的数量加入
+        //取出入库商品的数量
+        Double sum2 = stock.getSum();
+//        //如果本店库存中已经存在该商品的库存信息
+        //判断：该商品出库的总量是否比库存总量还多
+        if (sum2>sum1){
+            session.setAttribute("addOutOfStockMsg","错误：出库的数量大于库存量！！！！！！！！！！！");
+            return "redirect:toAddOutOfStock.do";
+        }
+        Double newSum = sum1 - sum2;
+        //将商品数量加上入库
+        stockInfoService.warehousing(newSum, storeId, goodsId);
+        //判断是否达到库存预警值
+        //根据商品id和店铺id取出该商品的库存信息
+        StockInfo stockInfo = stockInfoService.getThisStockInfoByGoodsId(storeId, goodsId);
+        Double sum3 = stockInfo.getSum();
+        Double warningValue = stockInfo.getWarningValue();
+        LOGGER.info("warningValue:{}", warningValue);
+        String stockWarning = null;
+        if (sum3 > warningValue) {
+            //如果大于最小预警值，将数据库中库存预警状态改为”正常“
+            stockWarning = StockWarning.NORMAL.getName();
+        }
+        if (sum3 <= warningValue) {
+            //如果小于最小预警值，将数据库中库存预警状态改为”过小“
+            stockWarning = StockWarning.LESS.getName();
+        }
+        stockInfoService.modifyStockWarning(stockWarning, storeId, goodsId);
+        //将该条入库信息写入数据库出入库信息表中
+        stockService.addOutOfStock(stock);
+        return "redirect:toOutOfStock.do";
+    }
+
+    /**
+     * 根据id查询对应的信息
+     *
+     * @param id
+     * @param model
+     * @param currentPage
+     * @return
+     */
+    @RequestMapping("/selectStockInfoById")
+    public String selectStockInfoById(Long id, Model model, @RequestParam(value = "currentPage", defaultValue = "1", required = false) int currentPage) {
+        LOGGER.info("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
+        PageBean<Stock> pageBean = stockService.findByPage(currentPage, id);
+        if (pageBean.getTotalCount() == 0) {
+            pageBean.setCurrPage(0);
+        }
+        model.addAttribute("pagemsg", pageBean);
+        //查询所有的店铺（为下拉框做准备）
+        List<Store> list = storeService.findAllStoreForSelect();
+        model.addAttribute("selectList", list);
+        LOGGER.info("---------------------------------------------------------------------------------------------------------------------");
+        LOGGER.info("" + list.size());
+        return "head_office/goods/stock/stock";
+    }
+
+    /**
+     * 跳向商品入库信息统计页面
+     *
+     * @param session
+     * @param model
+     * @param year        要查询的年份
+     * @param month       要查询的月份
+     * @param currentPage 每页显示的信息条数
+     * @return
+     */
+    @RequestMapping("/toCountInStockInfoPage")
+    public String toCountInStockInfoPage(HttpSession session, Model model, @RequestParam(value = "year", defaultValue = "2020", required = false) String year, @RequestParam(value = "month", defaultValue = "04", required = false) String month, @RequestParam(value = "currentPage", defaultValue = "1", required = false) int currentPage) {
+        LOGGER.info("--------------------------------------------------------------------------------------------------------------------");
+        LOGGER.info("year的值为：{}", year);
+        LOGGER.info("month的值为：{}", month);
+        String yearMonth=year+"-"+month+"%";
+        Long storeId = findStoreIdBySession(session);
+        List<StockInfoCount> stockInfoCounts=new ArrayList<>();
+        //统计商品入库信息
+        //需要展示的信息：商品编号、总入库量
+        //1.查出所有商品的属性
+        List<Goods> goodsList=goodsService.findAll();
+        //1.遍历所有的商品id
+        for (Goods goods:goodsList
+             ) {
+            //根据店铺编号，商品编号查询本店该商品所有的入库信息
+            Double sum=stockService.findAllStockInfoByStoreIdAndGoodsId(storeId,goods.getId(),yearMonth);
+            if (sum!=null){
+                LOGGER.info("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
+                LOGGER.info("sum:{}",sum);
+                StockInfoCount stockInfoCount=StockInfoCount.createData(goods.getId(),sum);
+                stockInfoCounts.add(stockInfoCount);
+            }
+        }
+        LOGGER.info("-------------------------------------------------------------------------------------------------------------------------");
+        LOGGER.info("stockInfoCounts:{}",stockInfoCounts);
+        model.addAttribute("stockInfoCounts",stockInfoCounts);
+
+        PageBean<Stock> pageBean = stockService.countInStockInfoPage(currentPage, storeId, year, month);
+        if (pageBean.getTotalCount() == 0) {
+            pageBean.setCurrPage(0);
+        }
+        model.addAttribute("pagemsg", pageBean);
+        String roles = findRolesByStoreId(storeId);
+        return toMyCountInStockByRoles(roles);
+    }
+
+    /**
+     * 跳向商品入库信息统计页面
+     *
+     * @param session
+     * @param model
+     * @param year        要查询的年份
+     * @param month       要查询的月份
+     * @param currentPage 每页显示的信息条数
+     * @return
+     */
+    @RequestMapping("/toCountOutStockInfoPage")
+    public String toCountOutStockInfoPage(HttpSession session, Model model, @RequestParam(value = "year", defaultValue = "2020", required = false) String year, @RequestParam(value = "month", defaultValue = "04", required = false) String month, @RequestParam(value = "currentPage", defaultValue = "1", required = false) int currentPage) {
+        LOGGER.info("--------------------------------------------------------------------------------------------------------------------");
+        LOGGER.info("year的值为：", year);
+        LOGGER.info("month的值为：", month);
+        String yearMonth=year+"-"+month+"%";
+        Long storeId = findStoreIdBySession(session);
+        PageBean<Stock> pageBean = stockService.countOutStockInfoPage(currentPage, storeId, year, month);
+        if (pageBean.getTotalCount() == 0) {
+            pageBean.setCurrPage(0);
+        }
+        model.addAttribute("pagemsg", pageBean);
+        String roles = findRolesByStoreId(storeId);
+
+        List<StockInfoCount> stockInfoCounts=new ArrayList<>();
+        //查询所有的商品基本信息
+        List<Goods> list = goodsService.findAll();
+        ////根据店铺编号，商品编号查询本店该商品所有的出库信息
+        for (Goods goods : list) {
+            //查询出本店每种商品的出库的总出库量
+            Double sum=stockService.countAllStockInfoSumByStoreIdAndGoodsId(storeId,goods.getId(),yearMonth);
+            if (sum!=null){
+                LOGGER.info("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
+                LOGGER.info("sum:{}",sum);
+                StockInfoCount stockInfoCount=StockInfoCount.createData(goods.getId(),sum);
+                stockInfoCounts.add(stockInfoCount);
+            }
+        }
+        LOGGER.info("-------------------------------------------------------------------------------------------------------------------------");
+        LOGGER.info("stockInfoCounts:{}",stockInfoCounts);
+        model.addAttribute("stockInfoCounts",stockInfoCounts);
+        return toMyCountOutStockByRoles(roles);
+    }
+
+
+    /**
+     * 跳向入库信息页面并查询本店所有的库存信息
+     *
+     * @param session
+     * @param model
+     * @param currentPage
+     * @return
+     */
+    @RequestMapping("/toWarehousing")
+    public String toWarehousing(HttpSession session, Model model, @RequestParam(value = "currentPage", defaultValue = "1", required = false) int currentPage) {
+        Long storeId = findStoreIdBySession(session);
+        PageBean<Stock> pageBean = stockService.toWarehousing(currentPage, storeId);
+        if (pageBean.getTotalCount() == 0) {
+            pageBean.setCurrPage(0);
+        }
+        model.addAttribute("pagemsg", pageBean);
+        return "view/goods/stock/warehousing";
+    }
+
+    /**
+     * 跳向出库信息页面并查询本店所有的库存信息
+     *
+     * @param session
+     * @param model
+     * @param currentPage
+     * @return
+     */
+    @RequestMapping("/toOutOfStock")
+    public String toOutOfStock(HttpSession session, Model model, @RequestParam(value = "currentPage", defaultValue = "1", required = false) int currentPage) {
+        Long storeId = findStoreIdBySession(session);
+        PageBean<Stock> pageBean = stockService.toOutOfStock(currentPage, storeId);
+        if (pageBean.getTotalCount() == 0) {
+            pageBean.setCurrPage(0);
+        }
+        model.addAttribute("pagemsg", pageBean);
+        return "view/goods/stock/outOfStock";
+    }
+
+
+    /**
+     * 根据角色跳到自己的员工界面
+     *
+     * @param roles
+     * @return
+     */
+    public String toMyStockByRoles(String roles) {
+        if (roles.equals(StoreRoles.HEADOFFICE.getName())) {
+            return "head_office/goods/stock/stock";
+        }
+        if (roles.equals(StoreRoles.BRANCH.getName())) {
+            return "view/goods/stock/stock";
+        }
+        return "";
+    }
+
+
+    /**
+     * @param roles
+     * @return 根据店铺角色跳向各自的商品入库信息
+     */
+    public String toMyCountInStockByRoles(String roles) {
+        if (roles.equals(StoreRoles.HEADOFFICE.getName())) {
+            return "head_office/count/stock/stockInfoInCount";
+        }
+        if (roles.equals(StoreRoles.BRANCH.getName())) {
+            return "view/count/stock/stockInfoInCount";
+        }
+        return "";
+    }
+
+    /**
+     * @param roles
+     * @return 根据店铺角色跳向各自的商品入库信息
+     */
+    public String toMyCountOutStockByRoles(String roles) {
+        if (roles.equals(StoreRoles.HEADOFFICE.getName())) {
+            return "head_office/count/stock/stockInfoOutCount";
+        }
+        if (roles.equals(StoreRoles.BRANCH.getName())) {
+            return "view/count/stock/stockInfoOutCount";
+        }
+        return "";
+    }
+
+    /**
+     * 根据店铺id查询店铺角色（总店/分店）
+     *
+     * @param storeId
+     * @return
+     */
+    public String findRolesByStoreId(Long storeId) {
+        PageBean<Store> pageBean = storeService.selectStoreInfoById(1, storeId);
+        String roles = pageBean.getLists().get(0).getRoles();
+        return roles;
+    }
+}

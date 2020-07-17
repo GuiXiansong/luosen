@@ -1,0 +1,34 @@
+package com.gxs.controller;
+
+import com.gxs.pojo.CommodityPurchase;
+import com.gxs.service.CommodityPurchaseService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import java.util.List;
+
+/**
+ * @author 皮皮桂
+ * @site guixiansong.com
+ * @company 皮皮桂软件开发科技有限公司
+ * @create 2020-03-24 3:04 PM
+ */
+@Controller
+@RequestMapping("/commodityPurchase")
+public class CommodityPurchaseController {
+
+    @Autowired
+    private CommodityPurchaseService commodityPurchaseService;
+    /**
+     * 跳到商品采购信息页面
+     * @return
+     */
+    @RequestMapping("/toCommodityPurchase")
+    public String findAll(Model model){
+        List<CommodityPurchase> list=commodityPurchaseService.findAll();
+        model.addAttribute("commodityPurchaseList",list);
+        return "view/commodityPurchase/commodityPurchase";
+    }
+}

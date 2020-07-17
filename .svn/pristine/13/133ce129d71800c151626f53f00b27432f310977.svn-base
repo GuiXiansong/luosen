@@ -1,0 +1,54 @@
+package com.gxs.pojo;
+
+/**
+ * @author 皮皮桂
+ * @site guixiansong.com
+ * @company 皮皮桂软件开发科技有限公司
+ * @create 2020-04-01 9:42 PM
+ */
+
+/**
+ * 物流信息
+ */
+public class Logistics {
+    //编号
+    private Long id;
+    //分店名称
+    private String name;
+    //物品重量
+    private Double weight;
+    //运费
+    private Double freight;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Double getWeight() {
+        return weight;
+    }
+
+    public void setWeight(Double weight) {
+        this.weight = weight;
+    }
+
+    public Double getFreight() {
+        return freight;
+    }
+
+    public void setFreight(Double freight) {
+        this.freight = freight;
+    }
+}

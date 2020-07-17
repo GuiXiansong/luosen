@@ -1,0 +1,28 @@
+package com.gxs.service;
+
+import com.gxs.pojo.Merchandising;
+import com.gxs.pojo.PageBean;
+
+/**
+ * @author 皮皮桂
+ * @site guixiansong.com
+ * @company 皮皮桂软件开发科技有限公司
+ * @create 2020-04-17 1:52
+ */
+public interface MerchandisingService {
+    PageBean<Merchandising> findByPage(int currentPage, Long storeId);
+
+    void addMerchandisingInfo(Merchandising merchandising);
+
+    Merchandising findMerchandisingById(Long id);
+
+    void modifyMerchanising(Merchandising merchandising);
+
+    void deleteMerchandising(Long id);
+
+    PageBean<Merchandising> countMerchandisingInfo(int currentPage, Long storeId, String year, String month);
+
+    Double getSumCount(Long storeId, Long goodsId, String year, String month);
+
+    Double getSumSales(Long storeId, Long goodsId, String year, String month);
+}

@@ -1,0 +1,74 @@
+package com.gxs.pojo;
+
+/**
+ * @author 皮皮桂
+ * @site guixiansong.com
+ * @company 皮皮桂软件开发科技有限公司
+ * @create 2020-03-16 8:31 PM
+ */
+
+/**
+ * 会员
+ */
+public class Member {
+    //编号
+    private Long id;
+    //卡号
+    private String cardNumber;
+    //姓名
+    private String name;
+    //手机号
+    private String phone;
+    //会员积分
+    private Long integral;
+    //会员等级
+    private String grade;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getCardNumber() {
+        return cardNumber;
+    }
+
+    public void setCardNumber(String cardNumber) {
+        this.cardNumber = cardNumber;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public Long getIntegral() {
+        return integral;
+    }
+
+    public void setIntegral(Long integral) {
+        this.integral = integral;
+    }
+
+    public String getGrade() {
+        return grade;
+    }
+
+    public void setGrade(String grade) {
+        this.grade = grade;
+    }
+}

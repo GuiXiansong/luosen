@@ -1,0 +1,14 @@
+package com.gxs.service;
+
+import com.gxs.pojo.Logistics;
+import com.gxs.pojo.PageBean;
+
+/**
+ * @author 皮皮桂
+ * @site guixiansong.com
+ * @company 皮皮桂软件开发科技有限公司
+ * @create 2020-04-02 2:31 PM
+ */
+public interface LogisticsService {
+    PageBean<Logistics> findByPage(int currentPage);
+}

@@ -1,0 +1,43 @@
+package com.gxs.dao;
+
+import com.gxs.pojo.Stock;
+import org.apache.ibatis.annotations.Param;
+
+import java.util.HashMap;
+import java.util.List;
+
+/**
+ * @author 皮皮桂
+ * @site guixiansong.com
+ * @company 皮皮桂软件开发科技有限公司
+ * @create 2020-04-17 3:00
+ */
+public interface StockDao {
+    int selectCount2(HashMap<String, Object> map);
+
+    List<Stock> findByPage(HashMap<String, Object> map);
+
+    void addStockInfo(Stock stock);
+
+    int selectCount(Long storeId);
+
+    List<Stock> findByPage2(HashMap<String, Object> map);
+
+    int selectCountOutStock(HashMap<String, Object> map);
+
+    List<Stock> findByPageOutStock(HashMap<String, Object> map);
+
+    int toWarehousingSelectCount(Long storeId);
+
+    List<Stock> toWarehousingFindByPage(HashMap<String, Object> map);
+
+    int toOutOfStockSelectCount(Long storeId);
+
+    List<Stock> toOutOfStockFindByPage(HashMap<String, Object> map);
+
+    void addOutOfStock(Stock stock);
+
+    Double findAllStockInfoByStoreIdAndGoodsId(@Param("storeId") Long storeId, @Param("goodsId") Long goodsId, @Param("yearMonth") String yearMonth);
+
+    Double countAllStockInfoSumByStoreIdAndGoodsId(@Param("storeId") Long storeId,@Param("goodsId") Long goodsId,@Param("yearMonth") String yearMonth);
+}

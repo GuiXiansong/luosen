@@ -1,0 +1,22 @@
+package com.gxs.pojo;
+
+/**
+ * @author 皮皮桂
+ * @site guixiansong.com
+ * @company 皮皮桂软件开发科技有限公司
+ * @create 2020-04-05 8:54 PM
+ */
+
+/**
+ * 库存信息
+ */
+public class Stock {
+    //编号
+    private Long id;
+    //店铺id
+    private Long storeId;
+    //商品编号
+    private Long goodsId;
+    //库存数量/重量
+    //库存预警（预警最大数量/重量）
+}

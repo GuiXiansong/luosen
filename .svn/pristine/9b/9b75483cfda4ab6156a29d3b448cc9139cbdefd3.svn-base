@@ -1,0 +1,98 @@
+package com.gxs.controller;
+
+import com.gxs.pojo.CommodityPurchase;
+import com.gxs.service.CommodityPurchaseService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import javax.servlet.http.HttpSession;
+import java.util.List;
+
+/**
+ * @author 皮皮桂
+ * @site guixiansong.com
+ * @company 皮皮桂软件开发科技有限公司
+ * @create 2020-03-24 3:04 PM
+ */
+@Controller
+@RequestMapping("/commodityPurchase")
+public class CommodityPurchaseController {
+
+    @Autowired
+    private CommodityPurchaseService commodityPurchaseService;
+    /**
+     * 跳到商品采购信息页面
+     * @return
+     */
+    @RequestMapping("/toCommodityPurchase")
+    public String findAll(Model model){
+        List<CommodityPurchase> list=commodityPurchaseService.findAll();
+        model.addAttribute("commodityPurchaseList",list);
+        return "view/goods/commodityPurchase/commodityPurchase";
+    }
+
+    /**
+     * 跳向修改商品采购信息页面
+     * @param id
+     * @return
+     */
+    @RequestMapping("/toModifyCommodityPurchase")
+    public String toModifyCommodityPurchase(Long id, HttpSession session){
+        System.out.println(id);
+        //方法一：通过id从数据库中查找
+        session.setAttribute("modifyCommodityPurchase",findCommodityPurchaseById(id));
+        System.out.println(findCommodityPurchaseById(id));
+
+        //方法二：通过id从session中查找(暂时失败)
+//        List<CommodityPurchase> list= (List<CommodityPurchase>) session.getAttribute("commodityPurchaseList");
+//        CommodityPurchase commodityPurchase=null;
+//        for (CommodityPurchase data:list
+//             ) {
+//            System.out.println(data);
+//            if (data.getId()==id){
+//                commodityPurchase=data;
+//            }
+//        }
+//        session.setAttribute("modifyCommodityPurchase",commodityPurchase);
+//        System.out.println(commodityPurchase);
+
+        return "view/goods/commodityPurchase/modifyCommodityPurchase";
+    }
+
+    /**
+     * 通过id查找单条商品采购信息
+     * @param id 商品采购信息id
+     * @return 单条商品采购信息
+     */
+    public CommodityPurchase findCommodityPurchaseById(Long id){
+        return commodityPurchaseService.findCommodityPurchaseById(id);
+    }
+
+    @RequestMapping("/modifyCommodityPurchase")
+    public String modifyCommodityPurchase(CommodityPurchase commodityPurchase){
+        commodityPurchaseService.modifyCommodityPurchase(commodityPurchase);
+        return "redirect:toCommodityPurchase.do";
+    }
+
+    /**
+     * 跳向添加商品采购信息页面
+     * @return
+     */
+    @RequestMapping("/toAddCommodityPurchase")
+    public String toAddCommodityPurchase(){
+        return "view/goods/commodityPurchase/addCommodityPurchase";
+    }
+
+    /**
+     * 添加单条商品采购信息
+     * @param commodityPurchase
+     * @return
+     */
+    @RequestMapping("/addCommodityPurchase")
+    public String addCommodityPurchase(CommodityPurchase commodityPurchase){
+        commodityPurchaseService.addCommodityPurchase(commodityPurchase);
+        return "redirect:toCommodityPurchase.do";
+    }
+}

@@ -1,0 +1,666 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ArtifactsWorkspaceSettings">
+    <artifacts-to-build>
+      <artifact name="luoSen:war exploded" />
+    </artifacts-to-build>
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="075d49ec-de90-4939-8d54-9045ffd9ad26" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/gxs/controller/MerchandisingController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gxs/controller/MerchandisingController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/gxs/controller/StockController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gxs/controller/StockController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/gxs/dao/EmployeeDao.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gxs/dao/EmployeeDao.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/head_office/count/merchandising/merchandisingInfoCount.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/head_office/count/merchandising/merchandisingInfoCount.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/head_office/count/stock/stockInfoInCount.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/head_office/count/stock/stockInfoInCount.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/head_office/count/stock/stockInfoOutCount.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/head_office/count/stock/stockInfoOutCount.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/head_office/page.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/head_office/page.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/view/count/merchandising/merchandisingInfoCount.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/view/count/merchandising/merchandisingInfoCount.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/view/employee/modifyEmployee.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/view/employee/modifyEmployee.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/view/login/info.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/view/login/info.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/view/page.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/view/page.jsp" afterDir="false" />
+    </list>
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="CompilerWorkspaceConfiguration">
+    <option name="MAKE_PROJECT_ON_SAVE" value="true" />
+  </component>
+  <component name="DatabaseView">
+    <option name="SHOW_INTERMEDIATE" value="true" />
+    <option name="GROUP_DATA_SOURCES" value="true" />
+    <option name="GROUP_SCHEMA" value="true" />
+    <option name="GROUP_CONTENTS" value="false" />
+    <option name="SORT_POSITIONED" value="false" />
+    <option name="SHOW_EMPTY_GROUPS" value="false" />
+    <option name="AUTO_SCROLL_FROM_SOURCE" value="false" />
+    <option name="HIDDEN_KINDS">
+      <set />
+    </option>
+    <expand />
+    <select />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Interface" />
+        <option value="Enum" />
+        <option value="Jsp File" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="JRebelWorkspace">
+    <option name="jrebelEnabledAutocompile" value="true" />
+  </component>
+  <component name="LogFilters">
+    <option name="FILTER_ERRORS" value="false" />
+    <option name="FILTER_WARNINGS" value="false" />
+    <option name="FILTER_INFO" value="true" />
+    <option name="FILTER_DEBUG" value="true" />
+    <option name="CUSTOM_FILTER" />
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="mavenHome" value="D:/applications/apache-maven-3.6.3" />
+        <option name="userSettingsFile" value="D:\applications\apache-maven-3.6.3\conf\settings.xml" />
+      </MavenGeneralSettings>
+    </option>
+    <option name="importingSettings">
+      <MavenImportingSettings>
+        <option name="jdkForImporter" value="1.8" />
+        <option name="vmOptionsForImporter" value="-Xmx1024m" />
+      </MavenImportingSettings>
+    </option>
+  </component>
+  <component name="ProjectId" id="1Z9GQQp8A5pLH1GQ4GB8BugdU6r" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="1" id="Add" />
+    <ConfirmationsSetting value="2" id="Remove" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="WebServerToolWindowFactoryState" value="true" />
+    <property name="WebServerToolWindowPanel.toolwindow.highlight.mappings" value="true" />
+    <property name="WebServerToolWindowPanel.toolwindow.highlight.symlinks" value="true" />
+    <property name="WebServerToolWindowPanel.toolwindow.show.date" value="false" />
+    <property name="WebServerToolWindowPanel.toolwindow.show.permissions" value="false" />
+    <property name="WebServerToolWindowPanel.toolwindow.show.size" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main/webapp/static/js" />
+    <property name="nodejs_package_manager_path" value="npm" />
+    <property name="project.structure.last.edited" value="SDKs" />
+    <property name="project.structure.proportion" value="0.15" />
+    <property name="project.structure.side.proportion" value="0.38579655" />
+    <property name="settings.editor.selected.configurable" value="reference.settingsdialog.project.gradle" />
+  </component>
+  <component name="RebelAgentSelection">
+    <selection>jr</selection>
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="F:\versionControl\svn\svn_repo\luoSen\src\main\webapp\static\js" />
+      <recent name="F:\versionControl\svn\svn_repo\luoSen\src\main\webapp\WEB-INF\view" />
+      <recent name="F:\versionControl\svn\svn_repo\luoSen\src\main\webapp\WEB-INF\head_office\count\stock" />
+      <recent name="F:\versionControl\svn\svn_repo\luoSen\src\main\webapp\WEB-INF\head_office\count" />
+      <recent name="F:\versionControl\svn\svn_repo\luoSen\src\main\webapp\WEB-INF\head_office\goods\stock" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.gxs.pojo" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="F:\versionControl\svn\svn_repo\luoSen\src\main\webapp\WEB-INF\head_office\count\merchandising" />
+      <recent name="F:\versionControl\svn\svn_repo\luoSen\src\main\webapp\WEB-INF\view\goods" />
+    </key>
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="RunManager" selected="Tomcat Server.luoSen">
+    <configuration name="Test_redis" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="luoSen" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.gxs.test.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.gxs.test" />
+      <option name="MAIN_CLASS_NAME" value="com.gxs.test.Test_redis" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Test_redis.test2" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="luoSen" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.gxs.test.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.gxs.test" />
+      <option name="MAIN_CLASS_NAME" value="com.gxs.test.Test_redis" />
+      <option name="METHOD_NAME" value="test2" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Test_redis.testJedisTemplate" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="luoSen" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.gxs.test.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.gxs.test" />
+      <option name="MAIN_CLASS_NAME" value="com.gxs.test.Test_redis" />
+      <option name="METHOD_NAME" value="testJedisTemplate" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory" factoryName="Local" APPLICATION_SERVER_NAME="Tomcat 9.0.22" ALTERNATIVE_JRE_ENABLED="true" ALTERNATIVE_JRE_PATH="C:\Program Files\Java\jdk1.8.0_202\jre">
+      <option name="OPEN_IN_BROWSER_URL" value="http://localhost:8080/luoSen/" />
+      <option name="BROWSER_ID" value="a7bb68e0-33c0-4d6f-a81a-aac1fdb870c8" />
+      <option name="UPDATE_ON_FRAME_DEACTIVATION" value="true" />
+      <option name="UPDATE_CLASSES_ON_FRAME_DEACTIVATION" value="true" />
+      <deployment>
+        <artifact name="luoSen:war exploded">
+          <settings>
+            <option name="CONTEXT_PATH" value="/luoSen" />
+          </settings>
+        </artifact>
+      </deployment>
+      <server-settings>
+        <option name="BASE_DIRECTORY_NAME" value="_luoSen" />
+        <option name="HTTP_PORT" value="8080" />
+      </server-settings>
+      <predefined_log_file enabled="true" id="Tomcat" />
+      <predefined_log_file enabled="true" id="Tomcat Catalina" />
+      <predefined_log_file id="Tomcat Manager" />
+      <predefined_log_file id="Tomcat Host Manager" />
+      <predefined_log_file id="Tomcat Localhost Access" />
+      <RunnerSettings RunnerId="Debug">
+        <option name="DEBUG_PORT" value="51400" />
+      </RunnerSettings>
+      <RunnerSettings RunnerId="JRebel Debug">
+        <option name="DEBUG_PORT" value="51401" />
+      </RunnerSettings>
+      <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="Cover">
+        <option name="USE_ENV_VARIABLES" value="true" />
+        <STARTUP>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </STARTUP>
+        <SHUTDOWN>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </SHUTDOWN>
+      </ConfigurationWrapper>
+      <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="Debug">
+        <option name="USE_ENV_VARIABLES" value="true" />
+        <STARTUP>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </STARTUP>
+        <SHUTDOWN>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </SHUTDOWN>
+      </ConfigurationWrapper>
+      <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="JRebel Debug">
+        <option name="USE_ENV_VARIABLES" value="true" />
+        <STARTUP>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </STARTUP>
+        <SHUTDOWN>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </SHUTDOWN>
+      </ConfigurationWrapper>
+      <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="JRebel Executor">
+        <option name="USE_ENV_VARIABLES" value="true" />
+        <STARTUP>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </STARTUP>
+        <SHUTDOWN>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </SHUTDOWN>
+      </ConfigurationWrapper>
+      <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="Run">
+        <option name="USE_ENV_VARIABLES" value="true" />
+        <STARTUP>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </STARTUP>
+        <SHUTDOWN>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </SHUTDOWN>
+      </ConfigurationWrapper>
+      <method v="2">
+        <option name="Make" enabled="true" />
+        <option name="BuildArtifacts" enabled="true">
+          <artifact name="luoSen:war exploded" />
+          <artifact name="luoSen:war" />
+        </option>
+      </method>
+    </configuration>
+    <configuration name="aliyun" type="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory" factoryName="Remote" APPLICATION_SERVER_NAME="Tomcat 9.0.22" ALTERNATIVE_JRE_ENABLED="false">
+      <option name="HOST" value="aliyun.guixiansong.xyz" />
+      <option name="LOCAL" value="false" />
+      <option name="BROWSER_ID" value="a7bb68e0-33c0-4d6f-a81a-aac1fdb870c8" />
+      <option name="UPDATING_POLICY" value="hot-swap-classes" />
+      <deployment>
+        <artifact name="luoSen:war exploded">
+          <settings>
+            <option name="CONTEXT_PATH" value="/luoSen_war_exploded" />
+          </settings>
+        </artifact>
+      </deployment>
+      <server-settings>
+        <data>
+          <option name="targets">
+            <list>
+              <WatchedTargetModelImpl>
+                <option name="name" value="CONTEXT_XML" />
+                <option name="transportStagingTarget">
+                  <TransportTarget>
+                    <option name="id" value="95d0da20-addf-4762-95f7-f5f2585c3b31" />
+                    <id>95d0da20-addf-4762-95f7-f5f2585c3b31</id>
+                  </TransportTarget>
+                </option>
+                <option name="watchedLocalPath" value="" />
+                <watched-path />
+                <name>CONTEXT_XML</name>
+                <transport-target>
+                  <TransportTarget>
+                    <option name="id" value="95d0da20-addf-4762-95f7-f5f2585c3b31" />
+                    <id>95d0da20-addf-4762-95f7-f5f2585c3b31</id>
+                  </TransportTarget>
+                </transport-target>
+              </WatchedTargetModelImpl>
+              <StagingTargetModelImpl>
+                <option name="name" value="STAGING" />
+                <option name="stagingRemotePath" value="/usr/local/tomcat9/apache-tomcat-9.0.31/webapps" />
+                <option name="transportStagingTarget">
+                  <TransportTarget>
+                    <option name="id" value="e324bdc0-2b4a-41aa-ad7c-a62a84778460" />
+                    <id>e324bdc0-2b4a-41aa-ad7c-a62a84778460</id>
+                  </TransportTarget>
+                </option>
+                <staging-path>/usr/local/tomcat9/apache-tomcat-9.0.31/webapps</staging-path>
+                <name>STAGING</name>
+                <transport-target>
+                  <TransportTarget>
+                    <option name="id" value="e324bdc0-2b4a-41aa-ad7c-a62a84778460" />
+                    <id>e324bdc0-2b4a-41aa-ad7c-a62a84778460</id>
+                  </TransportTarget>
+                </transport-target>
+              </StagingTargetModelImpl>
+            </list>
+          </option>
+          <option name="transportHostId" value="8b119d86-63d6-4b58-bf2b-d309dbd0683f" />
+          <host-id>8b119d86-63d6-4b58-bf2b-d309dbd0683f</host-id>
+        </data>
+      </server-settings>
+      <predefined_log_file enabled="true" id="Tomcat" />
+      <predefined_log_file enabled="true" id="TOMCAT_LOCALHOST_LOG_ID" />
+      <RunnerSettings RunnerId="Debug">
+        <option name="DEBUG_PORT" value="65527" />
+        <option name="LOCAL" value="false" />
+      </RunnerSettings>
+      <RunnerSettings RunnerId="JRebel Debug">
+        <option name="DEBUG_PORT" value="65528" />
+        <option name="LOCAL" value="false" />
+      </RunnerSettings>
+      <method v="2">
+        <option name="Make" enabled="true" />
+        <option name="BuildArtifacts" enabled="true">
+          <artifact name="luoSen:war exploded" />
+        </option>
+      </method>
+    </configuration>
+    <configuration name="luoSen" type="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory" factoryName="Local" APPLICATION_SERVER_NAME="Tomcat 9.0.22" ALTERNATIVE_JRE_ENABLED="true" ALTERNATIVE_JRE_PATH="C:\Program Files\Java\jdk1.8.0_202\jre">
+      <option name="BROWSER_ID" value="a7bb68e0-33c0-4d6f-a81a-aac1fdb870c8" />
+      <option name="UPDATE_ON_FRAME_DEACTIVATION" value="true" />
+      <option name="UPDATE_CLASSES_ON_FRAME_DEACTIVATION" value="true" />
+      <deployment>
+        <artifact name="luoSen:war exploded">
+          <settings>
+            <option name="CONTEXT_PATH" value="/luoSen" />
+          </settings>
+        </artifact>
+      </deployment>
+      <server-settings>
+        <option name="BASE_DIRECTORY_NAME" value="Tomcat_9_0_22_luoSen" />
+        <option name="HTTP_PORT" value="8080" />
+      </server-settings>
+      <predefined_log_file enabled="true" id="Tomcat" />
+      <predefined_log_file enabled="true" id="Tomcat Catalina" />
+      <predefined_log_file id="Tomcat Manager" />
+      <predefined_log_file id="Tomcat Host Manager" />
+      <predefined_log_file id="Tomcat Localhost Access" />
+      <RunnerSettings RunnerId="Debug">
+        <option name="DEBUG_PORT" value="51400" />
+      </RunnerSettings>
+      <RunnerSettings RunnerId="JRebel Debug">
+        <option name="DEBUG_PORT" value="51401" />
+      </RunnerSettings>
+      <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="Cover">
+        <option name="USE_ENV_VARIABLES" value="true" />
+        <STARTUP>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </STARTUP>
+        <SHUTDOWN>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </SHUTDOWN>
+      </ConfigurationWrapper>
+      <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="Debug">
+        <option name="USE_ENV_VARIABLES" value="true" />
+        <STARTUP>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </STARTUP>
+        <SHUTDOWN>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </SHUTDOWN>
+      </ConfigurationWrapper>
+      <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="JRebel Debug">
+        <option name="USE_ENV_VARIABLES" value="true" />
+        <STARTUP>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </STARTUP>
+        <SHUTDOWN>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </SHUTDOWN>
+      </ConfigurationWrapper>
+      <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="JRebel Executor">
+        <option name="USE_ENV_VARIABLES" value="true" />
+        <STARTUP>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </STARTUP>
+        <SHUTDOWN>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </SHUTDOWN>
+      </ConfigurationWrapper>
+      <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="Run">
+        <option name="USE_ENV_VARIABLES" value="true" />
+        <STARTUP>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </STARTUP>
+        <SHUTDOWN>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </SHUTDOWN>
+      </ConfigurationWrapper>
+      <method v="2">
+        <option name="Make" enabled="true" />
+        <option name="BuildArtifacts" enabled="true">
+          <artifact name="luoSen:war exploded" />
+        </option>
+      </method>
+    </configuration>
+    <list>
+      <item itemvalue="JUnit.Test_redis.testJedisTemplate" />
+      <item itemvalue="JUnit.Test_redis" />
+      <item itemvalue="JUnit.Test_redis.test2" />
+      <item itemvalue="Tomcat Server.luoSen" />
+      <item itemvalue="Tomcat Server.aliyun" />
+    </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="JUnit.Test_redis.test2" />
+        <item itemvalue="JUnit.Test_redis.testJedisTemplate" />
+        <item itemvalue="JUnit.Test_redis" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SvnConfiguration" cleanupOnStartRun="true">
+    <configuration>C:\Users\gxs\AppData\Roaming\Subversion</configuration>
+    <supportedVersion>125</supportedVersion>
+  </component>
+  <component name="SvnFileUrlMappingImpl">
+    <option name="myMappingRoots">
+      <list>
+        <SvnCopyRootSimple>
+          <option name="myVcsRoot" value="F:\versionControl\svn\svn_repo\luoSen" />
+          <option name="myCopyRoot" value="F:\versionControl\svn\svn_repo\luoSen" />
+        </SvnCopyRootSimple>
+      </list>
+    </option>
+    <option name="myMoreRealMappingRoots">
+      <list>
+        <SvnCopyRootSimple>
+          <option name="myVcsRoot" value="F:\versionControl\svn\svn_repo\luoSen" />
+          <option name="myCopyRoot" value="F:\versionControl\svn\svn_repo\luoSen" />
+        </SvnCopyRootSimple>
+      </list>
+    </option>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="075d49ec-de90-4939-8d54-9045ffd9ad26" name="Default Changelist" comment="" />
+      <created>1584243879431</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1584243879431</updated>
+      <workItem from="1584243880709" duration="1207000" />
+      <workItem from="1584340437644" duration="6475000" />
+      <workItem from="1584368800093" duration="3685000" />
+      <workItem from="1584404348912" duration="19282000" />
+      <workItem from="1584519434469" duration="5258000" />
+      <workItem from="1584541115044" duration="6443000" />
+      <workItem from="1584690477757" duration="5469000" />
+      <workItem from="1584765794862" duration="16715000" />
+      <workItem from="1584858119677" duration="2550000" />
+      <workItem from="1584862152243" duration="5518000" />
+      <workItem from="1584885019123" duration="348000" />
+      <workItem from="1584886007805" duration="492000" />
+      <workItem from="1584932495891" duration="3700000" />
+      <workItem from="1584962745407" duration="1257000" />
+      <workItem from="1585008783246" duration="16037000" />
+      <workItem from="1585115966556" duration="9163000" />
+      <workItem from="1585132110892" duration="5411000" />
+      <workItem from="1585144499236" duration="1945000" />
+      <workItem from="1585190292818" duration="18418000" />
+      <workItem from="1585284562897" duration="13276000" />
+      <workItem from="1585319399365" duration="5454000" />
+      <workItem from="1585370429416" duration="451000" />
+      <workItem from="1585371692607" duration="2320000" />
+      <workItem from="1585378125632" duration="320000" />
+      <workItem from="1585378553820" duration="210000" />
+      <workItem from="1585549967285" duration="2402000" />
+      <workItem from="1585626906520" duration="1444000" />
+      <workItem from="1585637310450" duration="2500000" />
+      <workItem from="1585661956841" duration="1433000" />
+      <workItem from="1585712180718" duration="1181000" />
+      <workItem from="1585731972362" duration="11005000" />
+      <workItem from="1585795611388" duration="3807000" />
+      <workItem from="1585802586989" duration="12873000" />
+      <workItem from="1585898476762" duration="15212000" />
+      <workItem from="1585965764511" duration="11817000" />
+      <workItem from="1585990640514" duration="7706000" />
+      <workItem from="1586055595914" duration="7232000" />
+      <workItem from="1586079548379" duration="7450000" />
+      <workItem from="1586092044886" duration="8303000" />
+      <workItem from="1586106434286" duration="3593000" />
+      <workItem from="1586135906652" duration="1491000" />
+      <workItem from="1586138371450" duration="7222000" />
+      <workItem from="1586191899362" duration="603000" />
+      <workItem from="1586328175406" duration="51000" />
+      <workItem from="1586394471812" duration="371000" />
+      <workItem from="1586401758293" duration="166000" />
+      <workItem from="1586405488477" duration="3152000" />
+      <workItem from="1586410200232" duration="435000" />
+      <workItem from="1586410773215" duration="1958000" />
+      <workItem from="1586413444424" duration="743000" />
+      <workItem from="1586414654130" duration="1235000" />
+      <workItem from="1586417103297" duration="36000" />
+      <workItem from="1586447599975" duration="1216000" />
+      <workItem from="1586486261160" duration="3277000" />
+      <workItem from="1586496043564" duration="23000" />
+      <workItem from="1586527251759" duration="1399000" />
+      <workItem from="1586661839859" duration="3064000" />
+      <workItem from="1586671334980" duration="19000" />
+      <workItem from="1586705606107" duration="1087000" />
+      <workItem from="1586750487194" duration="6000" />
+      <workItem from="1586769149922" duration="12721000" />
+      <workItem from="1586829258380" duration="3354000" />
+      <workItem from="1586842358192" duration="72000" />
+      <workItem from="1586880342863" duration="3495000" />
+      <workItem from="1586914461657" duration="5806000" />
+      <workItem from="1586929207390" duration="4453000" />
+      <workItem from="1586965359565" duration="10980000" />
+      <workItem from="1587001121707" duration="2787000" />
+      <workItem from="1587013094158" duration="7000" />
+      <workItem from="1587046189044" duration="23000" />
+      <workItem from="1587052407984" duration="11253000" />
+      <workItem from="1587086862934" duration="4545000" />
+      <workItem from="1587101070264" duration="2280000" />
+      <workItem from="1587139879084" duration="13536000" />
+      <workItem from="1587185332039" duration="6461000" />
+      <workItem from="1587223733513" duration="1059000" />
+      <workItem from="1587227294353" duration="13717000" />
+      <workItem from="1587267479751" duration="3961000" />
+      <workItem from="1587277363998" duration="1334000" />
+      <workItem from="1587312609670" duration="1468000" />
+      <workItem from="1587359675682" duration="12000" />
+      <workItem from="1587364487700" duration="13721000" />
+      <workItem from="1587410587797" duration="1291000" />
+      <workItem from="1587445508456" duration="58000" />
+      <workItem from="1587575981545" duration="4726000" />
+      <workItem from="1587611309628" duration="901000" />
+      <workItem from="1587620104487" duration="674000" />
+      <workItem from="1587656914520" duration="2841000" />
+      <workItem from="1587685710441" duration="60000" />
+      <workItem from="1587693077307" duration="974000" />
+      <workItem from="1587705914473" duration="77000" />
+      <workItem from="1587744485828" duration="11062000" />
+      <workItem from="1587783153779" duration="15880000" />
+      <workItem from="1587815493243" duration="10823000" />
+      <workItem from="1587834540471" duration="27000" />
+      <workItem from="1587865745783" duration="641000" />
+      <workItem from="1587872843811" duration="7719000" />
+      <workItem from="1587907796569" duration="870000" />
+      <workItem from="1587909926553" duration="14914000" />
+      <workItem from="1587956011389" duration="14008000" />
+      <workItem from="1587985130715" duration="22811000" />
+      <workItem from="1588043840146" duration="9477000" />
+      <workItem from="1588139103039" duration="1447000" />
+      <workItem from="1588234804327" duration="10000" />
+      <workItem from="1588317807250" duration="2443000" />
+      <workItem from="1588403092607" duration="645000" />
+      <workItem from="1588417895317" duration="5784000" />
+      <workItem from="1588476211150" duration="9506000" />
+      <workItem from="1588602138869" duration="115000" />
+      <workItem from="1588611345415" duration="5107000" />
+      <workItem from="1588664613895" duration="6684000" />
+      <workItem from="1588772402742" duration="1275000" />
+      <workItem from="1588861071875" duration="701000" />
+      <workItem from="1588951388356" duration="764000" />
+      <workItem from="1589027568543" duration="2636000" />
+      <workItem from="1589070518808" duration="10549000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-method">
+          <url>file://$PROJECT_DIR$/src/main/java/com/gxs/controller/LogisticsController.java</url>
+          <line>132</line>
+          <properties class="com.gxs.controller.LogisticsController" method="findLogisticsByStoreId">
+            <option name="EMULATED" value="true" />
+          </properties>
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/webapp/WEB-INF/head_office/page.jsp</url>
+          <line>88</line>
+          <option name="timeStamp" value="3" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/gxs/pojo/StockInfo.java</url>
+          <line>12</line>
+          <option name="timeStamp" value="4" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/gxs/pojo/User.java</url>
+          <line>23</line>
+          <option name="timeStamp" value="5" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+</project>

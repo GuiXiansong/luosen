@@ -1,0 +1,28 @@
+package com.gxs.dao;
+
+import com.gxs.pojo.Stock;
+
+import java.util.HashMap;
+import java.util.List;
+
+/**
+ * @author 皮皮桂
+ * @site guixiansong.com
+ * @company 皮皮桂软件开发科技有限公司
+ * @create 2020-04-17 3:00
+ */
+public interface StockDao {
+    int selectCount2(HashMap<String, Object> map);
+
+    List<Stock> findByPage(HashMap<String, Object> map);
+
+    void addStockInfo(Stock stock);
+
+    int selectCount(Long storeId);
+
+    List<Stock> findByPage2(HashMap<String, Object> map);
+
+    int selectCountOutStock(HashMap<String, Object> map);
+
+    List<Stock> findByPageOutStock(HashMap<String, Object> map);
+}

@@ -1,0 +1,87 @@
+/*
+SQLyog Ultimate v8.32 
+MySQL - 5.7.11 : Database - luosen
+*********************************************************************
+*/
+
+/*!40101 SET NAMES utf8 */;
+
+/*!40101 SET SQL_MODE=''*/;
+
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+CREATE DATABASE /*!32312 IF NOT EXISTS*/`luosen` /*!40100 DEFAULT CHARACTER SET utf8 */;
+
+USE `luosen`;
+
+/*Table structure for table `employee` */
+
+DROP TABLE IF EXISTS `employee`;
+
+CREATE TABLE `employee` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) DEFAULT NULL,
+  `sex` varchar(255) DEFAULT NULL,
+  `phone` varchar(255) DEFAULT NULL,
+  `sales_commission` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8;
+
+/*Data for the table `employee` */
+
+insert  into `employee`(`id`,`name`,`sex`,`phone`,`sales_commission`) values (1,'蜡笔小新','男','13902976158','1000'),(2,'漩涡鸣人','男','13902920386','2500'),(3,'宇智波佐助','男','18002573587','3000'),(4,'春野樱','女','13113861185','1500'),(5,'犬冢牙','男','13058150285','2000'),(6,'油女志乃','男','13538279675','1350'),(7,'日向雏田','女','13538267519','1290'),(8,'奈良鹿丸','男','13538259037','3208'),(9,'比如霸王丸','男','13538251973','2346'),(10,'秋道丁次','男','19842759903','1320'),(11,'山中井野','女','13538260673','2420'),(12,'凯','男','13538279875','2135'),(13,'月光疾风','男','13168030685','3224'),(14,'赤丸','男','13113861185','2937'),(15,'手鞠','女','13048811866','2254'),(16,'勘九郎','男','13128924133','2490'),(17,'夜叉丸','男','13058160585','2438'),(18,'药师兜','男','15602918487','5424'),(19,'大蛇丸','男','15692080487','2533'),(20,'山椒鱼半藏','男','15622875487','1883'),(21,'角都','男','15692083489','2349');
+
+/*Table structure for table `goods` */
+
+DROP TABLE IF EXISTS `goods`;
+
+CREATE TABLE `goods` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) DEFAULT NULL,
+  `purchase_price` double DEFAULT NULL,
+  `price` double DEFAULT NULL,
+  `integral` bigint(20) DEFAULT NULL,
+  `satisfaction` varchar(255) DEFAULT NULL,
+  `discount_rate` float DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+/*Data for the table `goods` */
+
+/*Table structure for table `member` */
+
+DROP TABLE IF EXISTS `member`;
+
+CREATE TABLE `member` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `card_number` varchar(255) DEFAULT NULL,
+  `name` varchar(255) DEFAULT NULL,
+  `phone` varchar(255) DEFAULT NULL,
+  `integral` bigint(20) DEFAULT NULL,
+  `grade` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+/*Data for the table `member` */
+
+/*Table structure for table `user` */
+
+DROP TABLE IF EXISTS `user`;
+
+CREATE TABLE `user` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `username` varchar(255) DEFAULT NULL,
+  `password` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+
+/*Data for the table `user` */
+
+insert  into `user`(`id`,`username`,`password`) values (1,'gxs','gxs');
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;

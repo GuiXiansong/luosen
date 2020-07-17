@@ -1,0 +1,70 @@
+package com.gxs.controller;
+
+import com.gxs.pojo.Employee;
+import com.gxs.service.EmployeeService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import javax.servlet.http.HttpSession;
+import java.util.List;
+
+/**
+ * @author 皮皮桂
+ * @site guixiansong.com
+ * @company 皮皮桂软件开发科技有限公司
+ * @create 2020-03-16 10:16 PM
+ */
+@Controller
+@RequestMapping("/employee")
+public class EmployeeController {
+
+    @Autowired
+    private EmployeeService employeeService;
+
+    /**
+     * 跳到员工管理页面
+     * @return
+     */
+    @RequestMapping("/toEmployee")
+    public String toEmployee(){
+        return "redirect:findAll.do";
+    }
+
+    /**
+     * 查询所有员工
+     */
+    @RequestMapping("/findAll")
+    public String findAll(HttpSession session){
+        List<Employee> list=employeeService.findAll();
+        session.setAttribute("employeeList",list);
+        return "view/employee/employee";
+    }
+
+
+    /**
+     * 跳到增加员工界面
+     * @return
+     */
+    @RequestMapping("/toAddEmployee")
+    public String toAddEmployee(){
+        return "view/employee/addEmployee";
+    }
+
+    /**
+     * 增加员工信息
+     * @param employee
+     * @return
+     */
+    @RequestMapping("/addEmployee")
+    public String addEmployee(Employee employee){
+        employeeService.addEmployee(employee);
+        return "redirect:findAll.do";
+    }
+
+    @RequestMapping("/deleteEmployee")
+    public String deleteEmployee(Long id){
+        employeeService.deleteEmployee(id);
+        return "redirect:findAll.do";
+    }
+}

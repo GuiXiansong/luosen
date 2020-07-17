@@ -1,0 +1,136 @@
+package com.gxs.controller;
+
+/**
+ * @author 皮皮桂
+ * @site guixiansong.com
+ * @company 皮皮桂软件开发科技有限公司
+ * @create 2020-04-03 7:16 PM
+ */
+
+import com.gxs.pojo.PageBean;
+import com.gxs.pojo.Store;
+import com.gxs.service.StoreService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import javax.servlet.http.HttpSession;
+import java.util.List;
+
+/**
+ * 总店和分店对应的编号
+ */
+@Controller
+@RequestMapping("/store")
+public class StoreController{
+    private static final Logger LOGGER= LoggerFactory.getLogger(StoreController.class);
+
+    @Autowired
+    private StoreService storeService;
+
+    /**
+     * 查询所有的店铺信息
+     */
+    @RequestMapping(value = "/findAllStoreInfo")
+    public String findAllStoreInfo(Model model, @RequestParam(value = "currentPage",defaultValue = "1",required = false) int currentPage){
+        PageBean<Store> pageBean=storeService.findAllStoreInfo(currentPage);
+        if (pageBean.getTotalCount()==0){
+            pageBean.setCurrPage(0);
+        }
+        model.addAttribute("pagemsg",pageBean);
+        //查询所有的店铺（为下拉框做准备）
+        List<Store> list=findAllStoreForSelect();
+        model.addAttribute("selectList",list);
+        return "head_office/store/store";
+    }
+
+
+    /**
+     * 根据id查询对应的店铺信息
+     * @param id
+     * @param model
+     * @param currentPage
+     * @return
+     */
+    @RequestMapping("/selectStoreInfoById")
+    public String selectStoreInfoById(Long id,Model model, @RequestParam(value = "currentPage",defaultValue = "1",required = false) int currentPage){
+        PageBean<Store> pageBean=storeService.selectStoreInfoById(currentPage,id);
+        if (pageBean.getTotalCount()==0){
+            pageBean.setCurrPage(0);
+        }
+        model.addAttribute("pagemsg",pageBean);
+        //查询所有的店铺（为下拉框做准备）
+        List<Store> list=findAllStoreForSelect();
+        model.addAttribute("selectList",list);
+        return "head_office/store/store";
+    }
+    //查询所有的店铺（为下拉框做准备）
+    public List<Store> findAllStoreForSelect() {
+        return storeService.findAllStoreForSelect();
+    }
+
+    /**
+     * 删除单条店铺信息
+     */
+    @RequestMapping("/deleteStoreInfo")
+    public String deleteStoreInfo(Long id){
+        storeService.deleteStoreInfo(id);
+        return "redirect:findAllStoreInfo.do";
+    }
+
+    /**
+     * 跳到添加店铺页面
+     * @return
+     */
+    @RequestMapping("/toAddStoreInfo")
+    public String toAddStoreInfo(){
+        return "head_office/store/addStore";
+    }
+
+
+    /**
+     * 添加单条店铺信息方法
+     * @param store
+     * @return
+     */
+    @RequestMapping("/addStoreInfo")
+    public String addStoreInfo(Store store){
+        LOGGER.info("传进来的store的值:"+store);
+        storeService.addStoreInfo(store);
+        return "redirect:findAllStoreInfo.do";
+    }
+
+    /**
+     * 跳到修改店铺信息页面
+     */
+    @RequestMapping("/toModifyStoreInfo")
+    public String toModifyStoreInfo(Model model,Long id){
+        LOGGER.info("要修改的店铺信息的id："+id);
+        model.addAttribute("modifyStoreInfo",storeService.findStoreInfoById(id));
+        return "head_office/store/modifyStoreInfo";
+    }
+
+    /**
+     * 修改店铺信息
+     * @param store
+     * @return
+     */
+    @RequestMapping("/modifyStoreInfo")
+    public String modifyStoreInfo(Store store){
+        LOGGER.info("要修改的店铺信息："+store);
+        System.out.println(store);
+        storeService.modifyStoreInfo(store);
+        return "redirect:findAllStoreInfo.do";
+    }
+
+    @RequestMapping("/selectAllStore")
+    @ResponseBody
+    public List<Store> selectAllStore(){
+        return storeService.selectAllStore();
+    }
+}

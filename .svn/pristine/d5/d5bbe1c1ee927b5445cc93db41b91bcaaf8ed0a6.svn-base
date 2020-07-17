@@ -1,0 +1,15 @@
+package com.gxs.controller;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+/**
+ * @author 皮皮桂
+ * @site guixiansong.com
+ * @company 皮皮桂软件开发科技有限公司
+ * @create 2020-03-18 10:19 PM
+ */
+@Controller
+@RequestMapping("/goods")
+public class GoodsController {
+}
